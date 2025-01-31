@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:cinemapedia/config/helpers/human_formats.dart';
 import 'package:cinemapedia/domain/entities/movie.dart';
 import 'package:flutter/material.dart';
 
@@ -44,7 +45,6 @@ class _Slide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final textStyles = Theme.of(context).textTheme;
 
     return Container(
@@ -89,11 +89,15 @@ class _Slide extends StatelessWidget {
           //* Rating
           Row(
             children: [
-              Icon(Icons.star_half_outlined, size: 15, color: Colors.yellow.shade800),
+              Icon(Icons.star_half_outlined,
+                  size: 15, color: Colors.yellow.shade800),
               SizedBox(width: 5),
-              Text('${movie.voteAverage}', style: textStyles.bodyMedium?.copyWith(color: Colors.yellow.shade800)),
+              Text('${movie.voteAverage}',
+                  style: textStyles.bodyMedium
+                      ?.copyWith(color: Colors.yellow.shade800)),
               SizedBox(width: 10),
-              Text('(${movie.popularity})', style: textStyles.bodySmall),
+              Text(HumanFormats.number(movie.popularity),
+                  style: textStyles.bodySmall),
             ],
           ),
         ],
