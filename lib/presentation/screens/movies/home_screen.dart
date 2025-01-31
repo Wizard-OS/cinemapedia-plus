@@ -48,10 +48,11 @@ class _HomeViewState extends ConsumerState<_HomeView> {
           movies: nowPlayingMovies,
           title: 'En cines',
           subtitle: 'Lunes',
+          loadNextPage: ()=>ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
         )
 
         // Expanded(
-        //   child: ListView.builder(
+        //   child: ListView.builder( 
         //     itemCount: nowPlayingMovies.length,
         //     itemBuilder: (context, index) {
         //       final movie = nowPlayingMovies[index];
