@@ -40,28 +40,70 @@ class _HomeViewState extends ConsumerState<_HomeView> {
 
     if (slideShowMovies.isEmpty) return CircularProgressIndicator();
 
-    return Column(
-      children: [
-        CustomAppbar(),
-        MoviesSlideshow(movies: slideShowMovies),
-        MovieHorizontalListview(
-          movies: nowPlayingMovies,
-          title: 'En cines',
-          subtitle: 'Lunes',
-          loadNextPage: ()=>ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
-        )
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          floating: true,
+          flexibleSpace: FlexibleSpaceBar(
+            title: CustomAppbar(),
+          ),
+        ),
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              return Column(
+                children: [
+                  // CustomAppbar(),
+                  MoviesSlideshow(movies: slideShowMovies),
+                  MovieHorizontalListview(
+                    movies: nowPlayingMovies,
+                    title: 'En cines',
+                    subtitle: 'Lunes',
+                    loadNextPage: () => ref
+                        .read(nowPlayingMoviesProvider.notifier)
+                        .loadNextPage(),
+                  ),
+                  MovieHorizontalListview(
+                    movies: nowPlayingMovies,
+                    title: 'Proximamente',
+                    subtitle: 'En este mes',
+                    loadNextPage: () => ref
+                        .read(nowPlayingMoviesProvider.notifier)
+                        .loadNextPage(),
+                  ),
+                  MovieHorizontalListview(
+                    movies: nowPlayingMovies,
+                    title: 'Populares',
+                    loadNextPage: () => ref
+                        .read(nowPlayingMoviesProvider.notifier)
+                        .loadNextPage(),
+                  ),
+                  MovieHorizontalListview(
+                    movies: nowPlayingMovies,
+                    title: 'Mejor calificadas',
+                    subtitle: 'Desde siempre',
+                    loadNextPage: () => ref
+                        .read(nowPlayingMoviesProvider.notifier)
+                        .loadNextPage(),
+                  ),
 
-        // Expanded(
-        //   child: ListView.builder( 
-        //     itemCount: nowPlayingMovies.length,
-        //     itemBuilder: (context, index) {
-        //       final movie = nowPlayingMovies[index];
-        //       return ListTile(
-        //         title: Text(movie.title),
-        //       );
-        //     },
-        //   ),
-        // ),
+                  // Expanded(
+                  //   child: ListView.builder(
+                  //     itemCount: nowPlayingMovies.length,
+                  //     itemBuilder: (context, index) {
+                  //       final movie = nowPlayingMovies[index];
+                  //       return ListTile(
+                  //         title: Text(movie.title),
+                  //       );
+                  //     },
+                  //   ),
+                  // ),
+                ],
+              );
+            },
+            childCount: 1,
+          ),
+        )
       ],
     );
   }
